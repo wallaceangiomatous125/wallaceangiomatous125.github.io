@@ -1,0 +1,476 @@
+<title>Pawan Sikawat — Platform & Data Engineer</title>
+<meta name="description" content="Pawan Sikawat — Senior Software Engineer building config-driven data platforms and the infrastructure that keeps them fast, durable, and cheap." />
+
+<style>
+  /* ── Tokens ───────────────────────────────────────────────────────────── */
+  :root {
+    --paper: #f6f7f9;
+    --surface: #ffffff;
+    --surface-2: #eef0f4;
+    --ink: #0e1116;
+    --ink-2: #3b424d;
+    --ink-3: #6b7280;
+    --line: #dfe3ea;
+    --accent: #3b5bdb;     /* cobalt */
+    --accent-ink: #2540b8;
+    --signal: #0d9aa8;     /* restrained cyan, data touches only */
+    --readout-bg: #0e1116;
+    --readout-fg: #e7eaf0;
+    --readout-accent: #7aa2ff;
+
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
+
+    --maxw: 68rem;
+    --radius: 12px;
+    --shadow: 0 1px 2px rgba(14,17,22,.05), 0 8px 24px rgba(14,17,22,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0b0d11;
+      --surface: #12151b;
+      --surface-2: #171b22;
+      --ink: #eef1f6;
+      --ink-2: #b7bfcc;
+      --ink-3: #838d9c;
+      --line: #222833;
+      --accent: #7aa2ff;
+      --accent-ink: #9bb8ff;
+      --signal: #2fd3d3;
+      --readout-bg: #12151b;
+      --readout-fg: #e7eaf0;
+      --readout-accent: #7aa2ff;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0b0d11; --surface: #12151b; --surface-2: #171b22;
+    --ink: #eef1f6; --ink-2: #b7bfcc; --ink-3: #838d9c; --line: #222833;
+    --accent: #7aa2ff; --accent-ink: #9bb8ff; --signal: #2fd3d3;
+    --readout-bg: #12151b; --readout-fg: #e7eaf0; --readout-accent: #7aa2ff;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"] {
+    --paper: #f6f7f9; --surface: #ffffff; --surface-2: #eef0f4;
+    --ink: #0e1116; --ink-2: #3b424d; --ink-3: #6b7280; --line: #dfe3ea;
+    --accent: #3b5bdb; --accent-ink: #2540b8; --signal: #0d9aa8;
+    --readout-bg: #0e1116; --readout-fg: #e7eaf0; --readout-accent: #7aa2ff;
+    --shadow: 0 1px 2px rgba(14,17,22,.05), 0 8px 24px rgba(14,17,22,.05);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(1.1rem, 4vw, 2.5rem); }
+  section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+  /* eyebrow / section labels — mono, tracked */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: .74rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: .6rem;
+    margin: 0 0 1.4rem;
+  }
+  .eyebrow::before { content: ""; width: 1.6rem; height: 2px; background: var(--accent); display: inline-block; }
+
+  h1, h2, h3 { text-wrap: balance; line-height: 1.12; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 750; margin: 0 0 1.6rem; }
+
+  a { color: var(--accent-ink); text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+  #flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: .5; }
+  .hero .wrap { position: relative; z-index: 1; padding-block: clamp(3.5rem, 10vw, 7rem); }
+  .hero-name {
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.035em;
+  }
+  .hero-role {
+    font-family: var(--mono);
+    font-size: clamp(.9rem, 2.2vw, 1.05rem);
+    color: var(--ink-2);
+    margin: 1rem 0 0;
+    letter-spacing: .01em;
+  }
+  .hero-role b { color: var(--signal); font-weight: 600; }
+  .hero-lede {
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    color: var(--ink);
+    max-width: 40ch;
+    margin: 1.6rem 0 2rem;
+    font-weight: 450;
+    line-height: 1.4;
+  }
+  .hero-lede em { color: var(--accent-ink); font-style: normal; font-weight: 650; }
+  .actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .btn {
+    font-family: var(--mono); font-size: .85rem; font-weight: 600;
+    padding: .7rem 1.1rem; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--ink); display: inline-flex; align-items: center; gap: .5rem;
+    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  :root[data-theme="dark"] .btn.primary, @media (prefers-color-scheme: dark) { }
+  .btn.primary:hover { background: var(--accent-ink); }
+
+  /* ── Impact readout band ─────────────────────────────────────────────── */
+  .readout {
+    background: var(--readout-bg);
+    color: var(--readout-fg);
+    border-radius: var(--radius);
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2.6rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+  }
+  .metric .n {
+    font-family: var(--mono); font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    color: var(--readout-accent);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .metric .l { font-size: .82rem; color: #aeb6c4; margin-top: .25rem; line-height: 1.35; }
+
+  /* ── Timeline ─────────────────────────────────────────────────────────── */
+  .timeline { display: grid; gap: 0; }
+  .role {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 1.5rem;
+    padding: 1.8rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .role:first-child { border-top: none; }
+  .role .meta .co { font-weight: 700; font-size: 1.05rem; }
+  .role .meta .when, .role .meta .where {
+    font-family: var(--mono); font-size: .78rem; color: var(--ink-3);
+    margin-top: .3rem; letter-spacing: .01em;
+  }
+  .role .title { font-family: var(--mono); font-size: .82rem; color: var(--accent-ink); margin: 0 0 .7rem; font-weight: 600; }
+  .role ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .6rem; }
+  .role li { position: relative; padding-left: 1.2rem; color: var(--ink-2); }
+  .role li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-size: .8rem; top: .15rem; }
+  .role li b { color: var(--ink); font-weight: 650; font-variant-numeric: tabular-nums; }
+  @media (max-width: 640px) { .role { grid-template-columns: 1fr; gap: .8rem; } }
+
+  /* ── Featured project ─────────────────────────────────────────────────── */
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(1.4rem, 4vw, 2.2rem);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .feature::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(var(--accent), var(--signal));
+  }
+  .feature .ftop { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
+  .feature h3 { font-size: 1.5rem; margin: 0; font-weight: 750; }
+  .feature .tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--accent); padding: .18rem .5rem; border-radius: 5px; }
+  .feature p { color: var(--ink-2); max-width: 62ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .chip { font-family: var(--mono); font-size: .74rem; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); padding: .3rem .55rem; border-radius: 6px; }
+  .feature .feature-lede { font-size: 1.18rem; color: var(--ink); font-weight: 500; max-width: 60ch; line-height: 1.45; }
+  .feature .feature-lede b { font-weight: 700; }
+  .feature .feature-lede em { font-style: normal; color: var(--accent-ink); font-weight: 650; }
+  .fstat { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin: 1.4rem 0; padding: 1.1rem 1.2rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; }
+  .fstat .fmet { display: flex; flex-direction: column; gap: .25rem; }
+  .fstat .fn { font-family: var(--mono); font-weight: 700; font-size: 1.7rem; color: var(--accent-ink); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1; }
+  .fstat .fl { font-size: .8rem; color: var(--ink-2); line-height: 1.35; }
+
+  /* ── Skills / grids ───────────────────────────────────────────────────── */
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem 1.3rem; box-shadow: var(--shadow); }
+  .card h3 { font-family: var(--mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 .9rem; font-weight: 600; }
+  .taglist { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .taglist span { font-family: var(--mono); font-size: .8rem; padding: .32rem .6rem; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--line); color: var(--ink); }
+
+  .certs { display: grid; gap: .7rem; }
+  .cert { display: flex; gap: 1rem; align-items: baseline; padding: .7rem 0; border-bottom: 1px dashed var(--line); }
+  .cert:last-child { border-bottom: none; }
+  .cert .d { font-family: var(--mono); font-size: .78rem; color: var(--ink-3); min-width: 6.5rem; }
+  .cert .t b { font-weight: 650; }
+  .cert .t span { color: var(--ink-3); }
+
+  .edu { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; }
+  .edu .inst { font-weight: 700; font-size: 1.1rem; }
+  .edu .deg { color: var(--ink-2); }
+  .edu .when { font-family: var(--mono); font-size: .8rem; color: var(--ink-3); }
+
+  /* ── Contact / footer ─────────────────────────────────────────────────── */
+  .contact { background: var(--readout-bg); color: var(--readout-fg); border-radius: var(--radius); padding: clamp(1.8rem, 5vw, 3rem); text-align: center; box-shadow: var(--shadow); }
+  .contact h2 { color: var(--readout-fg); }
+  .contact p { color: #aeb6c4; max-width: 44ch; margin-inline: auto; }
+  .contact .actions { justify-content: center; margin-top: 1.6rem; }
+  .contact .btn { background: transparent; color: var(--readout-fg); border-color: #333a47; }
+  .contact .btn.primary { background: var(--readout-accent); color: #0e1116; border-color: var(--readout-accent); }
+  footer { text-align: center; padding: 2rem 1rem 3rem; color: var(--ink-3); font-family: var(--mono); font-size: .76rem; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+
+<header class="hero">
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 class="hero-name">Pawan Sikawat</h1>
+    <p class="hero-role">Senior Software Engineer · <b>Data Platform</b> · <b>Platform &amp; Infrastructure</b> · Hyderabad, India</p>
+    <p class="hero-lede">I build <em>config-driven data platforms</em> — and the infrastructure that keeps them fast, durable, and cheap.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:pawanksikawat@gmail.com">Get in touch</a>
+      <a class="btn" href="https://github.com/PawanSikawat" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/pawan-sikawat" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+
+    <p class="eyebrow" style="margin-top:2.8rem;margin-bottom:.9rem">Achievement Highlights</p>
+    <div class="readout" role="list" aria-label="Achievement Highlights" style="margin-top:0">
+      <div class="metric" role="listitem"><div class="n">150+</div><div class="l">systems integrated on one config-driven platform</div></div>
+      <div class="metric" role="listitem"><div class="n">90%</div><div class="l">faster syncs via parallelized ingestion</div></div>
+      <div class="metric" role="listitem"><div class="n">99.999%</div><div class="l">pipeline uptime at scale</div></div>
+      <div class="metric" role="listitem"><div class="n">$12M</div><div class="l">ARR unlocked by a cloud expansion</div></div>
+      <div class="metric" role="listitem"><div class="n">$3M</div><div class="l">cloud spend reclaimed</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap reveal">
+    <p class="eyebrow">Experience</p>
+    <div class="timeline">
+
+      <article class="role">
+        <div class="meta">
+          <div class="co">Drivetrain</div>
+          <div class="when">Jan 2025 — Present</div>
+          <div class="where">Bangalore, India</div>
+        </div>
+        <div class="body">
+          <p class="title">Senior Software Engineer — Data Platform</p>
+          <ul>
+            <li>Architected a config-driven backend powering the entire data platform across <b>150+</b> integrated systems — onboarding a new system in <b>4–5</b> config entries (down from weeks), with built-in authentication/authorization and a fetch-trigger, status-check, and log-streaming framework.</li>
+            <li>Introduced parallel sync by detecting independent objects and syncing concurrently — cutting sync times by up to <b>90%</b>, plus a further <b>50%+</b> on the NetSuite and HubSpot taps.</li>
+            <li>Led the in-house migration of Python and third-party fetches — <b>15+</b> Meltano taps with self-hosted dbt — and re-platformed orchestration from Airflow to Temporal for durable execution, lifting reliability to <b>99.9%</b> and cutting costs by <b>70%</b>.</li>
+            <li>Designed a generic Catalogue service returning filterable, access-scoped items (schemas, tables, and more) from any connected system in sub-second time, powering user-facing add-data flows.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="role">
+        <div class="meta">
+          <div class="co">Amagi Media Labs</div>
+          <div class="when">Dec 2022 — Jan 2025</div>
+          <div class="where">Bangalore, India</div>
+        </div>
+        <div class="body">
+          <p class="title">Software Engineer → Senior Software Engineer — Platform &amp; Infrastructure</p>
+          <ul>
+            <li>Extended product deployment to Google Cloud, unlocking <b>15</b> new customers and <b>$12M</b> in ARR.</li>
+            <li>Containerized the legacy Mapsor asset-processing service on Kubernetes with redesigned APIs and OpenTelemetry observability — cutting operational overhead by <b>50%+</b> and improving uptime by <b>15%</b>.</li>
+            <li>Automated multi-region AWS bootstrapping via an <b>80+</b>-resource CloudFormation template — reducing setup from a week to under <b>20 minutes</b> — secured with Network Firewall and VPC Endpoints.</li>
+            <li>Built an AppSecret service (Kubernetes CRD + SOPS) for secure GitOps delivery of <b>50+</b> secrets across <b>12</b> apps — resolving ~<b>60%</b> of security tickets and contributing to IPO readiness.</li>
+            <li>Developed an Infrastructure Lifecycle service to reclaim idle resources — saving <b>$3M</b> in cloud spend and cutting manual effort by <b>75%+</b>.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="role">
+        <div class="meta">
+          <div class="co">CommerceIQ</div>
+          <div class="when">Jun 2021 — Dec 2022</div>
+          <div class="where">Bangalore, India</div>
+        </div>
+        <div class="body">
+          <p class="title">Software Engineer → Software Engineer II — Data Platform</p>
+          <ul>
+            <li>Re-architected data ingestion across <b>7</b> retailers from synchronous to asynchronous APIs — cutting ingestion time by <b>95%+</b> and resource usage by <b>90%+</b>, and onboarding from days to hours.</li>
+            <li>Built the first Apache Airflow pipelines for <b>7+</b> retailers and a Spring Boot auth service with scheduled token refresh and sub-<b>300ms</b> TTL caching — scaling uptime from <b>99%</b> to <b>99.999%</b>.</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap reveal">
+    <p class="eyebrow">Open source</p>
+    <div class="feature">
+      <div class="ftop">
+        <h3>faucet-stream</h3>
+        <span class="tag">Rust · Open source · Solo-authored</span>
+      </div>
+      <p class="feature-lede">A production-grade, config-driven <b>data-movement platform in Rust — with governance built in</b>, that moves data <em>one to two orders of magnitude faster</em> than a Python data-integration runtime, as a single native binary <em>or</em> an embeddable typed library.</p>
+      <div class="fstat">
+        <div class="fmet"><span class="fn">~96×</span><span class="fl">faster than Meltano — 712k rows/s on a reproducible 1M-row move</span></div>
+        <div class="fmet"><span class="fn">~62×</span><span class="fl">less memory — 11.8&nbsp;MiB vs 724&nbsp;MiB, with exact row parity</span></div>
+        <div class="fmet"><span class="fn">49</span><span class="fl">connectors — 28 sources &amp; 21 sinks, each an opt-in Cargo feature</span></div>
+      </div>
+      <p>It's a full <b>runtime</b>, not just connectors: incremental &amp; resumable replication, change-data-capture, <b>effectively-once delivery</b>, upsert/delete write modes, data-quality checks, versioned data contracts, PII masking, freshness/volume SLA monitoring, dead-letter queues, adaptive batch sizing, secrets-manager interpolation, OpenLineage lineage, and built-in Prometheus metrics + tracing — all with <b>zero per-connector code</b>. One binary, many runtimes: <code>run</code> (one-shot), <code>serve</code> (an HTTP control plane with bounded concurrency, durable run history, event-driven triggers, and lease-based orphan fencing across a cluster), <code>schedule</code> (cron), and <code>backfill</code> (resumable historical replay) — and third parties extend it through a documented connector SDK and protocol.</p>
+      <div class="chips">
+        <span class="chip">Rust</span><span class="chip">49 connectors</span><span class="chip">~96× vs Meltano</span>
+        <span class="chip">Effectively-once</span><span class="chip">Change-data-capture</span><span class="chip">Data contracts</span>
+        <span class="chip">DuckDB SQL transform</span><span class="chip">HTTP control plane</span><span class="chip">OpenLineage</span><span class="chip">Connector SDK</span>
+      </div>
+      <div class="actions" style="margin-top:1.4rem">
+        <a class="btn primary" href="https://github.com/PawanSikawat/faucet-stream" target="_blank" rel="noopener">Repository ↗</a>
+        <a class="btn" href="https://crates.io/crates/faucet-stream" target="_blank" rel="noopener">crates.io ↗</a>
+        <a class="btn" href="https://pawansikawat.github.io/faucet-stream/" target="_blank" rel="noopener">Docs ↗</a>
+        <a class="btn" href="https://github.com/PawanSikawat/faucet-stream/blob/main/BENCHMARKS.md" target="_blank" rel="noopener">Benchmarks ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap reveal">
+    <p class="eyebrow">Skills</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Languages</h3>
+        <div class="taglist"><span>Python</span><span>Java</span><span>Rust</span><span>Go</span><span>C++</span><span>C</span></div>
+      </div>
+      <div class="card">
+        <h3>Cloud &amp; DevOps</h3>
+        <div class="taglist"><span>AWS</span><span>GCP</span><span>Kubernetes</span><span>Terraform</span><span>Pulumi</span><span>ArgoCD</span><span>Helm</span><span>Docker</span><span>CloudFormation</span><span>GitHub Actions</span></div>
+      </div>
+      <div class="card">
+        <h3>Data</h3>
+        <div class="taglist"><span>faucet-stream</span><span>Airflow</span><span>dbt</span><span>Temporal</span><span>Meltano</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap reveal">
+    <p class="eyebrow">Certifications</p>
+    <div class="certs">
+      <div class="cert"><div class="d">Apr 2024</div><div class="t"><a class="cert-link" href="https://www.credly.com/badges/6d6baa30-0b7d-4acc-af95-b25dcf98ebbf/public_url" target="_blank" rel="noopener"><b>CKS — Certified Kubernetes Security Specialist</b> ↗</a> <span>· The Linux Foundation</span></div></div>
+      <div class="cert"><div class="d">Apr 2024</div><div class="t"><a class="cert-link" href="https://www.credly.com/badges/7f517e8a-ba17-4bfa-b3f5-93df84fae197/public_url" target="_blank" rel="noopener"><b>CKA — Certified Kubernetes Administrator</b> ↗</a> <span>· The Linux Foundation</span></div></div>
+      <div class="cert"><div class="d">Apr 2024</div><div class="t"><a class="cert-link" href="https://www.credly.com/badges/63693d69-34a0-4592-8534-36056d8e77b9/public_url" target="_blank" rel="noopener"><b>Terraform Associate (003)</b> ↗</a> <span>· HashiCorp</span></div></div>
+      <div class="cert"><div class="d">Jan 2022</div><div class="t"><a class="cert-link" href="https://www.credly.com/badges/c2964cd4-98f1-420b-af67-a18f071f8c6f/public_url" target="_blank" rel="noopener"><b>AWS Certified Data Analytics — Specialty</b> ↗</a> <span>· Amazon Web Services</span></div></div>
+      <div class="cert"><div class="d">Dec 2021</div><div class="t"><a class="cert-link" href="https://www.credly.com/badges/42c255d0-42df-45c7-b927-d874ec8885dc/public_url" target="_blank" rel="noopener"><b>AWS Certified Solutions Architect — Associate</b> ↗</a> <span>· Amazon Web Services</span></div></div>
+    </div>
+  </section>
+
+  <section class="wrap reveal">
+    <p class="eyebrow">Education</p>
+    <div class="card edu">
+      <div>
+        <div class="inst">Birla Institute of Technology and Science, Pilani</div>
+        <div class="deg">B.E. (Hons.) in Computer Science and Engineering</div>
+      </div>
+      <div class="when">Aug 2017 — May 2021</div>
+    </div>
+  </section>
+
+  <section class="wrap reveal">
+    <div class="contact">
+      <h2>Let's build something durable.</h2>
+      <p>Open to conversations about data platforms, infrastructure, and hard reliability problems.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:pawanksikawat@gmail.com">pawanksikawat@gmail.com</a>
+        <a class="btn" href="https://github.com/PawanSikawat" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://www.linkedin.com/in/pawan-sikawat" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Pawan Sikawat · built with intent · © 2026</footer>
+
+<script>
+  // Subtle flowing-pipeline backdrop in the hero — data moving through a network.
+  // Static, low-opacity, and disabled entirely under reduced-motion.
+  (function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var canvas = document.getElementById("flow");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var w, h, dpr, cols, dots = [], raf;
+
+    function accent() {
+      return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#3b5bdb";
+    }
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.max(3, Math.round(w / 120));
+      dots = [];
+      for (var c = 0; c < cols; c++) {
+        var x = (c + 0.5) * (w / cols);
+        var n = 2 + Math.floor((c * 37) % 3);
+        for (var i = 0; i < n + 2; i++) {
+          dots.push({ x: x, y: (h / (n + 2)) * i + ((c * 53) % 40), sp: 0.15 + ((c * 17 + i * 11) % 40) / 100, r: 1.4 + ((i * 13) % 2) });
+        }
+      }
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      var col = accent();
+      // faint vertical "pipes"
+      ctx.strokeStyle = col; ctx.globalAlpha = 0.10; ctx.lineWidth = 1;
+      for (var c = 0; c < cols; c++) {
+        var x = (c + 0.5) * (w / cols);
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+      }
+      // flowing dots
+      ctx.globalAlpha = 0.55; ctx.fillStyle = col;
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i];
+        d.y += d.sp;
+        if (d.y > h + 4) d.y = -4;
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(draw);
+    }
+    function staticDraw() {
+      ctx.clearRect(0, 0, w, h);
+      var col = accent();
+      ctx.strokeStyle = col; ctx.globalAlpha = 0.10; ctx.lineWidth = 1;
+      for (var c = 0; c < cols; c++) { var x = (c + 0.5) * (w / cols); ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+      ctx.globalAlpha = 0.5; ctx.fillStyle = col;
+      for (var i = 0; i < dots.length; i++) { var d = dots[i]; ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill(); }
+      ctx.globalAlpha = 1;
+    }
+    resize();
+    window.addEventListener("resize", function () { cancelAnimationFrame(raf); resize(); reduce ? staticDraw() : draw(); });
+    reduce ? staticDraw() : draw();
+  })();
+
+  // Scroll reveal.
+  (function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var els = document.querySelectorAll(".reveal");
+    if (reduce || !("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
