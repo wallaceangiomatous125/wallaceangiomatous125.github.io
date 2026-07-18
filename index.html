@@ -93,7 +93,14 @@
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
   /* ── Hero ─────────────────────────────────────────────────────────────── */
-  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hero {
+    position: relative; overflow: hidden; border-bottom: 1px solid var(--line);
+    /* Branded blue band so the hero reads blue in both light and dark themes
+       (derived from --accent + --paper, which both shift per theme). The #flow
+       canvas clears to transparent, so its data-stream lines sit over this. */
+    background:
+      radial-gradient(120% 130% at 50% -20%, color-mix(in srgb, var(--accent) 30%, var(--paper)) 0%, color-mix(in srgb, var(--accent) 11%, var(--paper)) 42%, var(--paper) 78%);
+  }
   #flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: .5; }
   .hero .wrap { position: relative; z-index: 1; padding-block: clamp(3.5rem, 10vw, 7rem); }
   .hero-name {
